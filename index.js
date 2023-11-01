@@ -1,26 +1,32 @@
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv').config();
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+const cookieParser = require("cookie-parser");
+const helmet = require("helmet");
+const sessions = require("express-session");
+const { Connect } = require("./utils/db");
+const AuthenticationRoutes = require("./routes/Authentication");
+const ProductRoutes = require("./routes/adminRoutes/productRoutes");
+const GlobalErrorHandler = require("./controllers/errorController");
+const GlobalHandler = require("./utils/errorHandler");
 
-const app = express()
-app.use(cors())
-app.use(express.json())
+const app = express();
+app.use(
+  cors()
+);
 
-const Connect = async()=>{
-    try {
-        await mongoose.connect(process.env.DB_URI)
-        console.log(`DB Connected Successfully`)
-    } catch (error) {
-        console.error('Db connection failed');
-    }
-    
-}
-Connect()
+app.use(cookieParser());
+app.use(helmet());
+app.use(express.json());
 
+Connect();
 
+app.use("/api", AuthenticationRoutes);
+app.use("/api/admin/product", ProductRoutes);
+app.use(GlobalErrorHandler);
+// app.use(GlobalHandler)
 
-const Port = process.env.PORT || 8080
-app.listen(Port, ()=>{
-    console.log(`Server runing on port ${Port}`)
-})
+const Port = process.env.PORT || 8080;
+app.listen(Port, () => {
+  console.log(`Server runing on port ${Port}`);
+});
