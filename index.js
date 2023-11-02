@@ -19,8 +19,6 @@ app.use(cookieParser());
 app.use(helmet());
 app.use(express.json());
 
-Connect();
-
 app.use("/api", AuthenticationRoutes);
 app.use("/api/admin/product", ProductRoutes);
 app.use(GlobalErrorHandler);
