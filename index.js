@@ -27,6 +27,14 @@ app.use(GlobalErrorHandler);
 // app.use(GlobalHandler)
 
 const Port = process.env.PORT || 8080;
-app.listen(Port, () => {
-  console.log(`Server runing on port ${Port}`);
-});
+
+Connect().then(() => {
+    app.listen(Port, () => {
+        console.log(`Listening for requests on ${Port}`);
+    })
+})
+
+
+// app.listen(Port, () => {
+//   console.log(`Server runing on port ${Port}`);
+// });
