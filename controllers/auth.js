@@ -31,7 +31,6 @@ module.exports.Register = asyncHandler( async (req, res, next) => {
     status: "ok",
     success: true,
     message: "Account Created Successfully",
-    newUser,
   });
   res.status(202);
 
