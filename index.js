@@ -19,6 +19,8 @@ app.use(cookieParser());
 app.use(helmet());
 app.use(express.json());
 
+
+
 app.use("/api", AuthenticationRoutes);
 app.use("/api/admin/product", ProductRoutes);
 app.use(GlobalErrorHandler);
@@ -26,13 +28,14 @@ app.use(GlobalErrorHandler);
 
 const Port = process.env.PORT || 8080;
 
-Connect().then(() => {
-    app.listen(Port, () => {
-        console.log(`Listening for requests on ${Port}`);
-    })
-})
+
+// Connect().then(() => {
+//     app.listen(Port, () => {
+//         console.log(`Listening for requests on ${Port}`);
+//     })
+// })
 
 
-// app.listen(Port, () => {
-//   console.log(`Server runing on port ${Port}`);
-// });
+app.listen(Port, () => {
+  console.log(`Server runing on port ${Port}`);
+});

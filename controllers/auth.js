@@ -33,26 +33,26 @@ module.exports.Register = asyncHandler( async (req, res, next) => {
     message: "Account Created Successfully",
     newUser,
   });
-  res.status(200);
+  res.status(202);
 
 });
 
 module.exports.Login = asyncHandler(async (req, res, next) => {
   const { error, value } = validateSignIn(req.body);
   if (error) {
-    return next(new AppError(error.message, 201));
+    return next(new AppError(error.message, 200));
   }
   const username = value.username;
   const findUser = await User.findOne({ username });
   if (!findUser) {
-    return next(new AppError("User does not exist", 201));
+    return next(new AppError("User does not exist", 200));
   }
   const isPasswordValid = await bcrypt.compare(
     value.password,
     findUser.password
   );
   if (!isPasswordValid) {
-    return next(new AppError("Invalid user details", 201)); 
+    return next(new AppError("Invalid user details", 200)); 
   }
 
   const token = jwt.sign({ id: findUser._id }, process.env.JWT_String, {
