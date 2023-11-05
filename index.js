@@ -26,13 +26,13 @@ app.use(GlobalErrorHandler);
 const Port = process.env.PORT || 8080;
 
 
-// Connect().then(() => {
-//     app.listen(Port, () => {
-//         console.log(`Listening for requests on ${Port}`);
-//     })
-// })
+Connect().then(() => {
+    app.listen(Port, () => {
+        console.log(`Listening for requests on ${Port}`);
+    })
+})
 
 
-app.listen(Port, () => {
-  console.log(`Server runing on port ${Port}`);
-});
+// app.listen(Port, () => {
+//   console.log(`Server runing on port ${Port}`);
+// });
