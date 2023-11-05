@@ -12,13 +12,7 @@ const GlobalHandler = require("./utils/errorHandler");
 
 const app = express();
 app.use(
-  cors({
-    origin:['https://frontend-flixcart.vercel.app', 
-    'https://frontend-flixcart.vercel.app/login', 
-    'https://frontend-flixcart.vercel.app/register',
-    'https://frontend-flixcart.vercel.app/shop'
-  ]
-  })
+  cors()
 );
 
 // app.use(cookieParser());
