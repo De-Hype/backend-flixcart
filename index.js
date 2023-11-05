@@ -19,12 +19,9 @@ app.use(
 app.use(helmet());
 app.use(express.json());
 
-
-
 app.use("/api", AuthenticationRoutes);
 app.use("/api/admin/product", ProductRoutes);
 app.use(GlobalErrorHandler);
-// app.use(GlobalHandler)
 
 const Port = process.env.PORT || 8080;
 
