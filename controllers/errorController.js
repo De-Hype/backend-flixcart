@@ -46,12 +46,11 @@ const GlobalErrorHandler = (err, req, res, next) => {
   err.status = err.status || "error";
   err.statusCode = err.statusCode || 500;
  
-  if (process.env.NODE_ENV === "development") {
+  if (Environment === "development") {
     
     return sendDevError(err, res);
-  }
-  if (process.env.NODE_ENV === "production") {
-      let error = { ...err };
+  } else{
+    let error = { ...err };
     if (error.name === "CastError") error = handleCastErrorDB();
     if (error.name === "ValidationError") error = handleValidationErrorDB();
     if (error.code === 11000) error =handleDuplicateErrorDB();
