@@ -41,7 +41,7 @@ const sendDevError = (err, res) => {
     
   });
 };
-const Environment = 'production';
+const Environment = 'development';
 const GlobalErrorHandler = (err, req, res, next) => {
   err.status = err.status || "error";
   err.statusCode = err.statusCode || 500;
