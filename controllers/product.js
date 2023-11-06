@@ -40,34 +40,23 @@ module.exports.getHomeProducts = asyncHandler(async (req, res) => {
 });
 
 module.exports.getProductsInfo = asyncHandler(async (req, res, next) => {
-  const getProductInfo = await Products.findOneById(req.body.id);
+  const getProductInfo = await Products.findOneById(req.params.searchTerm);
   if (!getProductInfo) {
     next(new AppError("Item by that Id not found", 401));
   }
   console.log(getProductInfo);
 });
 
-// const Cartstuff = [{
-//   id:1,
-//   "name":"David",
-// },
-// {
-//   id:2,
-//   "name":"Hype",
-// }
-// ]
-// const findP = Cartstuff.includes('David')
-// console.log(findP)
 module.exports.SearchResults = asyncHandler(async (req, res, next)=>{
-  const {searchTerm} = req.body;
-
+  const {searchTerm} = req.params;
+  if (searchTerm == "" || undefined){
+    return res.json({message:'No Product Found'})
+  }
 
   const findProducts = await Products.find({name:{$regex:searchTerm, $options:"i"}})
-  // const 
+  if (findProducts.length == 0){
+    return res.json({searchTerm, message:'Could not find product'})
+  }
+  res.json({success:true, status:"ok", searchTerm, findProducts})
 })
 
-module.exports.aDummy = asyncHandler(async (req, res, next) => {
-  //
-  next(new AppError("An Error Occured on product", 400));
-  console.log("A Dummy");
-});
