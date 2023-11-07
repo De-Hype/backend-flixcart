@@ -9,5 +9,4 @@ router.get('/get-product/:id', getProductsInfo)
 router.get('/home-product', getHomeProducts)
 router.get('/search-product/:searchTerm', SearchResults) 
 
-
 module.exports = router 

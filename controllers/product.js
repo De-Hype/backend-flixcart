@@ -40,12 +40,15 @@ module.exports.getHomeProducts = asyncHandler(async (req, res) => {
 });
 
 module.exports.getProductsInfo = asyncHandler(async (req, res, next) => {
-  const getProductInfo = await Products.findOneById(req.params.searchTerm);
+  const {id} = req.params;
+  
+  const getProductInfo = await Products.findById(id);
   if (!getProductInfo) {
-    next(new AppError("Item by that Id not found", 401));
+    return next(new AppError("Item by that Id not found", 200));
   }
-  console.log(getProductInfo);
+  res.status(202).json({status:'ok', getProductInfo})
 });
+
 
 module.exports.SearchResults = asyncHandler(async (req, res, next)=>{
   const {searchTerm} = req.params;
