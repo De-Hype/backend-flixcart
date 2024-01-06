@@ -1,4 +1,5 @@
 # biti-backend
+This is the Backend of the flixcart frontend application 
 Created using the following technologies
 NodeJs
 Express
